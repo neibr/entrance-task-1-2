@@ -16,15 +16,18 @@ export function initMap(ymaps, containerId) {
     clusterDisableClickZoom: false,
     geoObjectOpenBalloonOnClick: false,
     geoObjectHideIconOnBalloonOpen: false,
-    geoObjectBalloonContentLayout: getDetailsContentLayout(ymaps)
+    //geoObjectBalloonContentLayout: getDetailsContentLayout(ymaps)
   });
 
-  objectManager.clusters.options.set('preset', 'islands#greenClusterIcons');
+  objectManager.clusters.options.set({
+      preset: 'islands#greenClusterIcons'
+  });
 
   loadList().then(data => {
+    console.log(data); 
     objectManager.add(data);
   });
-
+/*
   // details
   objectManager.objects.events.add('click', event => {
     const objectId = event.get('objectId');
@@ -49,5 +52,8 @@ export function initMap(ymaps, containerId) {
     objectManager.setFilter(
       obj => filters[obj.isActive ? 'active' : 'defective']
     );
-  });
+  });*/
+
+  myMap.geoObjects.add(objectManager); 
+
 }
